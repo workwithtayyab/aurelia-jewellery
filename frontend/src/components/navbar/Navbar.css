@@ -1,0 +1,775 @@
+/* =====================================================
+   AURELIA NAVBAR
+===================================================== */
+
+.navbar {
+  width: 100%;
+  height: 78px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #eeeeee;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+}
+
+
+/* =====================================================
+   NAVBAR CONTAINER
+===================================================== */
+
+.navbar-container {
+  width: min(1320px, 90%);
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.navbar-logo {
+  color: #24211d;
+
+  text-decoration: none;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 27px;
+
+  font-weight: 400;
+
+  letter-spacing: 7px;
+
+  white-space: nowrap;
+
+  transition: 0.3s ease;
+}
+
+.navbar-logo:hover {
+  color: #b08d57;
+}
+
+
+/* =====================================================
+   NAVIGATION LINKS
+===================================================== */
+
+.navbar-links {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 42px;
+
+  margin-left: auto;
+  margin-right: 45px;
+}
+
+.navbar-links a {
+  position: relative;
+
+  color: #444;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  letter-spacing: 2px;
+
+  padding: 30px 0;
+
+  transition:
+    color 0.3s ease;
+}
+
+.navbar-links a:hover {
+  color: #b08d57;
+}
+
+
+/* =====================================================
+   ACTIVE LINK
+===================================================== */
+
+.navbar-links a.active {
+  color: #b08d57;
+}
+
+.navbar-links a.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: 20px;
+
+  width: 100%;
+
+  height: 1px;
+
+  background: #b08d57;
+}
+
+
+/* =====================================================
+   NAVBAR ACTIONS
+===================================================== */
+
+.navbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =====================================================
+   ICON BUTTONS
+===================================================== */
+
+.navbar-icon {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: #333;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  font-size: 17px;
+
+  padding: 0;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.navbar-icon:hover {
+  color: #b08d57;
+
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   CART / WISHLIST COUNT
+===================================================== */
+
+.navbar-count {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  min-width: 17px;
+  height: 17px;
+
+  padding: 0 4px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #b08d57;
+
+  color: white;
+
+  border-radius: 50%;
+
+  font-size: 9px;
+
+  font-family: Arial, sans-serif;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  border: 2px solid white;
+
+  box-sizing: content-box;
+}
+
+
+/* =====================================================
+   CART ICON
+===================================================== */
+
+.cart-icon {
+  border: none;
+}
+
+
+/* =====================================================
+   ACCOUNT ICON
+===================================================== */
+
+.account-icon {
+  text-decoration: none;
+}
+
+
+/* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+
+.navbar-menu-button {
+  display: none;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #333;
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+
+  padding: 0;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.navbar-menu-button:hover {
+  color: #b08d57;
+
+  transform: rotate(3deg);
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.navbar-notification {
+  position: fixed;
+
+  top: 95px;
+  right: 30px;
+
+  min-width: 300px;
+
+  max-width: 380px;
+
+  padding: 16px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e9e2d8;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.12);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  z-index: 3000;
+
+  animation:
+    notificationSlideIn 0.35s ease forwards;
+}
+
+
+/* =====================================================
+   NOTIFICATION ICON
+===================================================== */
+
+.notification-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f3eee7;
+
+  color: #b08d57;
+
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   NOTIFICATION CONTENT
+===================================================== */
+
+.notification-content {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.notification-content strong {
+  color: #24211d;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+}
+
+.notification-content span {
+  color: #777;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   REMOVED NOTIFICATION
+===================================================== */
+
+.navbar-notification.notification-removed .notification-icon {
+  background: #f5eeee;
+
+  color: #9a5c5c;
+}
+
+
+/* =====================================================
+   NOTIFICATION ANIMATION
+===================================================== */
+
+@keyframes notificationSlideIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .navbar-container {
+    width: 92%;
+  }
+
+  .navbar-links {
+    gap: 25px;
+
+    margin-right: 25px;
+  }
+
+  .navbar-links a {
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+  }
+
+  .navbar-actions {
+    gap: 12px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    height: 70px;
+  }
+
+
+  .navbar-container {
+    width: 90%;
+  }
+
+
+  /* -------------------------------
+     LOGO
+  -------------------------------- */
+
+  .navbar-logo {
+    font-size: 22px;
+
+    letter-spacing: 5px;
+  }
+
+
+  /* -------------------------------
+     MOBILE MENU
+  -------------------------------- */
+
+  .navbar-menu-button {
+    display: flex;
+  }
+
+
+  /* -------------------------------
+     NAVIGATION
+  -------------------------------- */
+
+  .navbar-links {
+
+    position: fixed;
+
+    top: 70px;
+    left: 0;
+
+    width: 100%;
+
+    height: calc(100vh - 70px);
+
+    background: #ffffff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: center;
+
+    gap: 0;
+
+    margin: 0;
+
+    padding-top: 35px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(-10px);
+
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease,
+      transform 0.3s ease;
+
+    overflow-y: auto;
+  }
+
+
+  /* -------------------------------
+     OPEN MENU
+  -------------------------------- */
+
+  .navbar-links.navbar-links-open {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+  }
+
+
+  /* -------------------------------
+     MOBILE LINKS
+  -------------------------------- */
+
+  .navbar-links a {
+
+    width: 100%;
+
+    padding: 20px 0;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+  }
+
+
+  .navbar-links a.active::after {
+
+    bottom: 10px;
+
+    width: 45%;
+
+    left: 27.5%;
+  }
+
+
+  /* -------------------------------
+     ACTIONS
+  -------------------------------- */
+
+  .navbar-actions {
+    gap: 8px;
+  }
+
+
+  .navbar-icon {
+    width: 35px;
+    height: 35px;
+
+    font-size: 16px;
+  }
+
+
+  .account-icon {
+    display: none;
+  }
+
+
+  /* -------------------------------
+     COUNT
+  -------------------------------- */
+
+  .navbar-count {
+
+    top: -1px;
+    right: -1px;
+
+    min-width: 16px;
+    height: 16px;
+
+    font-size: 8px;
+  }
+
+
+  /* -------------------------------
+     NOTIFICATION
+  -------------------------------- */
+
+  .navbar-notification {
+
+    top: 82px;
+
+    right: 15px;
+    left: 15px;
+
+    min-width: auto;
+
+    max-width: none;
+
+    padding: 14px 16px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    height: 65px;
+  }
+
+
+  .navbar-container {
+    width: 92%;
+  }
+
+
+  .navbar-logo {
+    font-size: 19px;
+
+    letter-spacing: 4px;
+  }
+
+
+  .navbar-icon {
+    width: 32px;
+    height: 32px;
+
+    font-size: 15px;
+  }
+
+
+  .navbar-actions {
+    gap: 4px;
+  }
+
+
+  .navbar-menu-button {
+    width: 32px;
+    height: 32px;
+
+    font-size: 19px;
+  }
+
+
+  .navbar-count {
+    min-width: 15px;
+    height: 15px;
+
+    font-size: 7px;
+
+    border-width: 1px;
+  }
+
+
+  .navbar-notification {
+
+    top: 76px;
+
+    right: 10px;
+    left: 10px;
+  }
+
+}
+
+/* ==========================================
+   AURELIA ADMIN LOGIN LINK
+========================================== */
+
+.navbar-links .navbar-admin-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  gap: 8px;
+
+  width: auto;
+  padding: 10px 13px;
+  margin: 0;
+
+  border: 1px solid rgba(168, 134, 74, 0.42);
+  border-radius: 3px;
+
+  color: #a8864a;
+  background: transparent;
+
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar-links .navbar-admin-link::after {
+  display: none;
+}
+
+.navbar-links .navbar-admin-link svg {
+  flex-shrink: 0;
+  font-size: 11px;
+  transition: transform 0.3s ease;
+}
+
+.navbar-links .navbar-admin-link:hover {
+  color: #fffaf2;
+  background-color: #4b382a;
+  border-color: #4b382a;
+  box-shadow: 0 4px 14px rgba(75, 56, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.navbar-links .navbar-admin-link:hover svg {
+  transform: scale(1.08);
+}
+
+.navbar-links .navbar-admin-link:active {
+  transform: translateY(0);
+}
+
+.navbar-links .navbar-admin-link:focus-visible {
+  outline: 2px solid #a8864a;
+  outline-offset: 4px;
+}
+
+/* Gold logo accent */
+.navbar-logo span {
+  color: #a8864a;
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+  .navbar-links .navbar-admin-link {
+    align-self: center;
+    width: auto;
+    margin-top: 12px;
+    padding: 12px 18px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .navbar-links .navbar-admin-link,
+  .navbar-links .navbar-admin-link svg {
+    transition: none;
+  }
+}

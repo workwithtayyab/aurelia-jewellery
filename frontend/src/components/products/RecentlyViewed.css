@@ -1,0 +1,230 @@
+/* =========================================
+   RECENTLY VIEWED
+========================================= */
+
+.recently-viewed-section {
+    max-width: 1200px;
+
+    margin: 90px auto 0;
+
+    padding-top: 70px;
+
+    border-top: 1px solid #ddd8d0;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.recently-viewed-header {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 45px;
+}
+
+
+.recently-viewed-eyebrow {
+    margin: 0 0 12px;
+
+    color: #a8864a;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+
+.recently-viewed-header h2 {
+    margin: 0 0 12px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 38px;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    color: #24211e;
+}
+
+
+.recently-viewed-description {
+    margin: 0;
+
+    color: #77716a;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   EXPLORE LINK
+========================================= */
+
+.recently-viewed-shop-link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid #24211e;
+
+    color: #24211e;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    letter-spacing: 1.8px;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.recently-viewed-shop-link svg {
+    font-size: 10px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.recently-viewed-shop-link:hover {
+    color: #a8864a;
+
+    border-color: #a8864a;
+}
+
+
+.recently-viewed-shop-link:hover svg {
+    transform: translateX(4px);
+}
+
+
+/* =========================================
+   PRODUCT GRID
+========================================= */
+
+.recently-viewed-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .recently-viewed-section {
+        margin-top: 75px;
+
+        padding-top: 55px;
+    }
+
+
+    .recently-viewed-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+
+    .recently-viewed-header h2 {
+        font-size: 34px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .recently-viewed-section {
+        margin-top: 60px;
+
+        padding-top: 45px;
+    }
+
+
+    .recently-viewed-header {
+        display: block;
+
+        margin-bottom: 30px;
+    }
+
+
+    .recently-viewed-header h2 {
+        font-size: 31px;
+    }
+
+
+    .recently-viewed-description {
+        max-width: 330px;
+
+        font-size: 13px;
+    }
+
+
+    .recently-viewed-shop-link {
+        margin-top: 22px;
+    }
+
+
+    .recently-viewed-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .recently-viewed-header h2 {
+        font-size: 28px;
+    }
+
+
+    .recently-viewed-grid {
+        gap: 8px;
+    }
+
+}

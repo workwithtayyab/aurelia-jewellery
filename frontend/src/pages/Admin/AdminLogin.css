@@ -1,0 +1,728 @@
+
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 18px;
+  background: #f7f5f0;
+  font-family: Arial, sans-serif;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 42px 38px;
+  background: #fff;
+  border: 1px solid #e9e1d3;
+  border-radius: 8px;
+  box-shadow: 0 18px 55px rgba(36, 33, 30, 0.08);
+  text-align: center;
+}
+
+.admin-login-brand {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #24211e;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-decoration: none;
+}
+
+.admin-login-brand span {
+  color: #a8864a;
+}
+
+.admin-login-emblem {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a8864a;
+  background: #f7f2e8;
+  border-radius: 50%;
+  font-size: 21px;
+}
+
+.admin-login-eyebrow {
+  margin-bottom: 10px;
+  color: #a8864a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.admin-login-card h1 {
+  margin: 0 0 12px;
+  color: #24211e;
+  font-family: Georgia, serif;
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.admin-login-description {
+  margin: 0 0 30px;
+  color: #77716a;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.admin-login-form label {
+  margin: 0 0 9px;
+  color: #332e28;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-login-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 49px;
+  margin-bottom: 22px;
+  padding: 0 14px;
+  border: 1px solid #e4ded4;
+  border-radius: 4px;
+  color: #a8864a;
+  background: #fff;
+}
+
+.admin-login-input:focus-within {
+  border-color: #a8864a;
+  box-shadow: 0 0 0 2px rgba(168, 134, 74, 0.1);
+}
+
+.admin-login-input input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 0;
+  border: none;
+  outline: none;
+  color: #24211e;
+  background: transparent;
+  font-size: 14px;
+}
+
+.admin-login-input input::placeholder {
+  color: #aaa39a;
+}
+
+.admin-password-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: none;
+  background: transparent;
+  color: #77716a;
+  cursor: pointer;
+}
+
+.admin-login-submit {
+  min-height: 49px;
+  margin-top: 3px;
+  border: 1px solid #24211e;
+  border-radius: 4px;
+  background: #24211e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.admin-login-submit:hover {
+  border-color: #a8864a;
+  background: #a8864a;
+}
+
+.admin-login-error {
+  margin: -10px 0 18px;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.admin-login-footer {
+  margin: 25px 0 14px;
+  color: #888077;
+  font-size: 12px;
+}
+
+.admin-login-back {
+  color: #a8864a;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.admin-login-back:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .admin-login-card {
+    padding: 34px 22px;
+  }
+
+  .admin-login-card h1 {
+    font-size: 29px;
+  }
+}
+
+/* ========================================
+   AURELIA ADMIN LOGIN - SMOOTH ANIMATIONS
+======================================== */
+
+/* Login page entrance */
+.admin-login-page {
+  animation: pageFadeIn 0.7s ease-out both;
+}
+
+/* Premium card entrance */
+.admin-login-card {
+  animation: cardReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center;
+}
+
+/* Logo reveal */
+.admin-login-brand {
+  animation: logoReveal 0.7s ease-out 0.15s both;
+  transition: color 0.3s ease;
+}
+
+.admin-login-brand:hover {
+  color: #a8864a;
+}
+
+/* Lock emblem */
+.admin-login-emblem {
+  animation: emblemReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+.admin-login-emblem:hover {
+  transform: translateY(-3px) rotate(-4deg);
+  box-shadow: 0 10px 24px rgba(168, 134, 74, 0.18);
+}
+
+/* Text entrance */
+.admin-login-eyebrow,
+.admin-login-card h1,
+.admin-login-description,
+.admin-login-footer,
+.admin-login-back {
+  animation: textReveal 0.65s ease-out 0.2s both;
+}
+
+/* Form entrance */
+.admin-login-form {
+  animation: formReveal 0.75s ease-out 0.25s both;
+}
+
+/* Smooth input focus */
+.admin-login-input {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.25s ease;
+}
+
+.admin-login-input:focus-within {
+  border-color: #a8864a;
+  box-shadow: 0 0 0 3px rgba(168, 134, 74, 0.12);
+  transform: translateY(-1px);
+}
+
+.admin-login-input input {
+  transition: color 0.25s ease;
+}
+
+.admin-login-input input:focus {
+  outline: none;
+}
+
+/* Sign-in button interaction */
+.admin-login-submit {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.admin-login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(80, 54, 35, 0.15);
+}
+
+.admin-login-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+  box-shadow: 0 3px 8px rgba(80, 54, 35, 0.1);
+}
+
+.admin-login-submit:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+/* Password visibility button */
+.admin-password-toggle {
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.admin-password-toggle:hover:not(:disabled) {
+  color: #a8864a;
+  transform: scale(1.08);
+}
+
+/* Back-to-store link */
+.admin-login-back {
+  transition:
+    color 0.25s ease,
+    letter-spacing 0.25s ease;
+}
+
+.admin-login-back:hover {
+  color: #a8864a;
+  letter-spacing: 0.2px;
+}
+
+/* Smooth error message entrance */
+.admin-login-error {
+  animation: errorReveal 0.35s ease-out both;
+}
+
+/* ========================================
+   KEYFRAMES
+======================================== */
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes logoReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes emblemReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes formReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes errorReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-page,
+  .admin-login-card,
+  .admin-login-brand,
+  .admin-login-emblem,
+  .admin-login-eyebrow,
+  .admin-login-card h1,
+  .admin-login-description,
+  .admin-login-footer,
+  .admin-login-back,
+  .admin-login-form,
+  .admin-login-error {
+    animation: none !important;
+  }
+
+  .admin-login-input,
+  .admin-login-submit,
+  .admin-password-toggle,
+  .admin-login-brand,
+  .admin-login-emblem,
+  .admin-login-back {
+    transition: none !important;
+  }
+}
+
+/* ==========================================
+   AURELIA — LUXURY MINIMAL REFINEMENT
+========================================== */
+
+.admin-login-page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #f7f3ec;
+}
+
+/* Soft ambient gold background */
+.admin-login-page::before,
+.admin-login-page::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: aureliaAmbient 12s ease-in-out infinite alternate;
+}
+
+.admin-login-page::before {
+  width: 420px;
+  height: 420px;
+  top: -180px;
+  right: -120px;
+  background: radial-gradient(
+    circle,
+    rgba(190, 158, 100, 0.17) 0%,
+    rgba(190, 158, 100, 0.05) 45%,
+    transparent 72%
+  );
+}
+
+.admin-login-page::after {
+  width: 480px;
+  height: 480px;
+  bottom: -250px;
+  left: -170px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 134, 74, 0.13) 0%,
+    rgba(168, 134, 74, 0.04) 48%,
+    transparent 72%
+  );
+  animation-delay: -5s;
+}
+
+/* Refined card */
+.admin-login-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(168, 134, 74, 0.2);
+  box-shadow:
+    0 24px 70px rgba(65, 46, 29, 0.07),
+    0 4px 16px rgba(65, 46, 29, 0.035);
+  transition:
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.admin-login-card:hover {
+  border-color: rgba(168, 134, 74, 0.32);
+  box-shadow:
+    0 28px 80px rgba(65, 46, 29, 0.09),
+    0 4px 16px rgba(65, 46, 29, 0.035);
+}
+
+/* Animated gold line at the top of the card */
+.admin-login-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #b99a61,
+    #e4d1a6,
+    #b99a61,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: aureliaGoldShimmer 5s linear infinite;
+}
+
+/* Premium brand treatment */
+.admin-login-brand {
+  display: inline-block;
+  letter-spacing: 0.16em;
+  transition:
+    color 0.3s ease,
+    letter-spacing 0.3s ease;
+}
+
+.admin-login-brand span {
+  color: #ad8950;
+  transition: color 0.3s ease;
+}
+
+.admin-login-brand:hover {
+  letter-spacing: 0.2em;
+}
+
+.admin-login-brand:hover span {
+  color: #d1b16e;
+}
+
+/* Subtle lock emblem glow */
+.admin-login-emblem {
+  box-shadow: 0 0 0 6px rgba(168, 134, 74, 0.055);
+  animation:
+    emblemReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+    aureliaEmblemGlow 4s ease-in-out 1s infinite;
+}
+
+.admin-login-emblem:hover {
+  box-shadow:
+    0 0 0 8px rgba(168, 134, 74, 0.08),
+    0 10px 24px rgba(168, 134, 74, 0.15);
+}
+
+/* Warm, polished input fields */
+.admin-login-input {
+  background-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(93, 70, 49, 0.15);
+}
+
+.admin-login-input:focus-within {
+  background-color: #fffdf9;
+  border-color: #b99a61;
+  box-shadow:
+    0 0 0 3px rgba(185, 154, 97, 0.12),
+    0 4px 12px rgba(93, 70, 49, 0.035);
+}
+
+.admin-login-input > svg {
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.admin-login-input:focus-within > svg {
+  color: #a8864a;
+  transform: scale(1.04);
+}
+
+/* Smooth password visibility change */
+.admin-login-input input[type="password"],
+.admin-login-input input[type="text"] {
+  transition:
+    opacity 0.2s ease,
+    color 0.25s ease;
+}
+
+.admin-password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #8b7865;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.admin-password-toggle:hover:not(:disabled) {
+  color: #a8864a;
+  transform: scale(1.1);
+}
+
+.admin-password-toggle:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+/* Muted gold button */
+.admin-login-submit {
+  background-image: linear-gradient(
+    110deg,
+    #4b382a 0%,
+    #5a4330 45%,
+    #6a5037 50%,
+    #4b382a 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  transition:
+    background-position 0.5s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.admin-login-submit:hover:not(:disabled) {
+  background-position: 100% 50%;
+  box-shadow: 0 8px 22px rgba(75, 56, 42, 0.2);
+  transform: translateY(-2px);
+}
+
+.admin-login-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+}
+
+/* Error feedback */
+.admin-login-error {
+  transform-origin: top left;
+  animation: aureliaErrorReveal 0.3s ease-out both;
+}
+
+/* Ambient movement */
+@keyframes aureliaAmbient {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-18px, 16px, 0) scale(1.08);
+  }
+}
+
+/* Gold highlight travelling along the card */
+@keyframes aureliaGoldShimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* Gentle emblem glow */
+@keyframes aureliaEmblemGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 6px rgba(168, 134, 74, 0.055);
+  }
+
+  50% {
+    box-shadow: 0 0 0 9px rgba(168, 134, 74, 0.09);
+  }
+}
+
+@keyframes aureliaErrorReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-page::before,
+  .admin-login-page::after,
+  .admin-login-card::before,
+  .admin-login-emblem {
+    animation: none !important;
+  }
+
+  .admin-login-card,
+  .admin-login-brand,
+  .admin-login-brand span,
+  .admin-login-input,
+  .admin-login-input > svg,
+  .admin-login-input input,
+  .admin-password-toggle,
+  .admin-login-submit {
+    transition: none !important;
+  }
+}
+
+.password-icon-transition {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: passwordIconReveal 0.2s ease-out both;
+}
+
+@keyframes passwordIconReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .password-icon-transition {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,698 @@
+/* =====================================================
+   AURELIA QUICK VIEW
+===================================================== */
+
+.quick-view-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 5000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    background: rgba(25, 22, 19, 0.72);
+
+    backdrop-filter: blur(5px);
+
+    animation: quickViewOverlayIn 0.25s ease;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.quick-view-modal {
+    position: relative;
+
+    width: min(100%, 1000px);
+    max-height: 90vh;
+
+    display: grid;
+    grid-template-columns: 48% 52%;
+
+    overflow: hidden;
+
+    background: #f8f6f2;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.25);
+
+    animation: quickViewModalIn 0.35s ease;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.quick-view-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 10;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    background: rgba(255, 255, 255, 0.92);
+
+    color: #24211e;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.quick-view-close:hover {
+    background: #24211e;
+
+    color: #ffffff;
+
+    transform: rotate(90deg);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.quick-view-image {
+    position: relative;
+
+    min-height: 600px;
+
+    overflow: hidden;
+
+    background: #eeeae4;
+}
+
+.quick-view-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.6s ease;
+}
+
+.quick-view-modal:hover .quick-view-image img {
+    transform: scale(1.025);
+}
+
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.quick-view-badge {
+    position: absolute;
+
+    top: 25px;
+    left: 25px;
+
+    padding: 9px 14px;
+
+    background: #24211e;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.quick-view-details {
+    padding: 50px 45px;
+
+    overflow-y: auto;
+
+    color: #24211e;
+}
+
+
+/* CATEGORY */
+
+.quick-view-category {
+    margin: 0 0 12px;
+
+    color: #a8864a;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* PRODUCT NAME */
+
+.quick-view-details h2 {
+    margin: 0 0 16px;
+
+    color: #24211e;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 38px;
+
+    line-height: 1.2;
+
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   RATING
+===================================================== */
+
+.quick-view-rating {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.quick-stars {
+    display: flex;
+
+    gap: 3px;
+
+    color: #a8864a;
+
+    font-size: 12px;
+}
+
+.quick-rating-text {
+    color: #77716a;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   PRICE
+===================================================== */
+
+.quick-view-price {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding-bottom: 22px;
+
+    border-bottom: 1px solid #ddd8d0;
+}
+
+.quick-view-price strong {
+    color: #24211e;
+
+    font-size: 25px;
+
+    font-weight: 500;
+}
+
+.quick-view-price span {
+    color: #aaa39a;
+
+    font-size: 15px;
+
+    text-decoration: line-through;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.quick-view-description {
+    margin: 23px 0;
+
+    color: #77716a;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+/* =====================================================
+   PRODUCT INFO
+===================================================== */
+
+.quick-view-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+    padding: 15px 0;
+
+    border-top: 1px solid #ddd8d0;
+    border-bottom: 1px solid #ddd8d0;
+}
+
+.quick-info-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.quick-info-item span {
+    color: #99928a;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.quick-info-item strong {
+    color: #24211e;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* =====================================================
+   PURCHASE AREA
+===================================================== */
+
+.quick-view-purchase {
+    display: grid;
+
+    grid-template-columns: 100px 1fr 55px;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+/* =====================================================
+   QUANTITY
+===================================================== */
+
+.quick-quantity {
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid #d0c9c0;
+
+    background: transparent;
+}
+
+.quick-quantity button {
+    width: 30px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: transparent;
+
+    color: #55504a;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    transition: color 0.3s ease;
+}
+
+.quick-quantity button:hover {
+    color: #a8864a;
+}
+
+.quick-quantity span {
+    color: #24211e;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   ADD TO BAG
+===================================================== */
+
+.quick-add-button {
+    min-height: 55px;
+
+    border: none;
+
+    background: #24211e;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    letter-spacing: 1.5px;
+
+    transition:
+        background 0.3s ease,
+        transform 0.2s ease;
+}
+
+.quick-add-button:hover {
+    background: #a8864a;
+}
+
+.quick-add-button:active {
+    transform: scale(0.98);
+}
+
+.quick-add-button.added {
+    background: #7d6845;
+}
+
+
+/* =====================================================
+   WISHLIST
+===================================================== */
+
+.quick-wishlist {
+    width: 55px;
+    height: 55px;
+
+    border: 1px solid #d0c9c0;
+
+    background: transparent;
+
+    color: #55504a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+.quick-wishlist:hover,
+.quick-wishlist.active {
+    border-color: #a8864a;
+
+    color: #a8864a;
+}
+
+.quick-wishlist.active {
+    background: rgba(168, 134, 74, 0.06);
+}
+
+
+/* =====================================================
+   BENEFITS
+===================================================== */
+
+.quick-view-benefits {
+    margin-top: 30px;
+
+    border-top: 1px solid #ddd8d0;
+}
+
+.quick-benefit {
+    display: flex;
+
+    gap: 13px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #ddd8d0;
+}
+
+.quick-benefit > svg {
+    flex-shrink: 0;
+
+    margin-top: 3px;
+
+    color: #a8864a;
+
+    font-size: 14px;
+}
+
+.quick-benefit strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #24211e;
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+.quick-benefit span {
+    color: #77716a;
+
+    font-size: 10px;
+}
+
+
+/* =====================================================
+   FULL DETAILS LINK
+===================================================== */
+
+.quick-view-details-link {
+    display: inline-block;
+
+    margin-top: 25px;
+
+    color: #24211e;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    border-bottom: 1px solid #a8864a;
+
+    padding-bottom: 5px;
+
+    transition: color 0.3s ease;
+}
+
+.quick-view-details-link:hover {
+    color: #a8864a;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes quickViewOverlayIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes quickViewModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .quick-view-overlay {
+        padding: 20px;
+    }
+
+    .quick-view-modal {
+        grid-template-columns: 42% 58%;
+
+        max-height: 92vh;
+    }
+
+    .quick-view-image {
+        min-height: 520px;
+    }
+
+    .quick-view-details {
+        padding: 40px 30px;
+    }
+
+    .quick-view-details h2 {
+        font-size: 31px;
+    }
+
+    .quick-view-purchase {
+        grid-template-columns: 90px 1fr 50px;
+    }
+
+    .quick-wishlist {
+        width: 50px;
+        height: 55px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+    .quick-view-overlay {
+        padding: 10px;
+
+        align-items: flex-end;
+    }
+
+    .quick-view-modal {
+        width: 100%;
+
+        max-height: 94vh;
+
+        display: block;
+
+        overflow-y: auto;
+    }
+
+    .quick-view-image {
+        height: 300px;
+        min-height: 300px;
+    }
+
+    .quick-view-details {
+        padding: 30px 22px 35px;
+    }
+
+    .quick-view-details h2 {
+        font-size: 29px;
+    }
+
+    .quick-view-close {
+        top: 12px;
+        right: 12px;
+
+        width: 38px;
+        height: 38px;
+    }
+
+    .quick-view-info {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .quick-view-purchase {
+        grid-template-columns: 85px 1fr 50px;
+    }
+
+    .quick-add-button {
+        font-size: 10px;
+
+        letter-spacing: 1px;
+    }
+
+    .quick-view-benefits {
+        margin-top: 25px;
+    }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+    .quick-view-image {
+        height: 260px;
+        min-height: 260px;
+    }
+
+    .quick-view-details {
+        padding: 25px 18px 30px;
+    }
+
+    .quick-view-details h2 {
+        font-size: 25px;
+    }
+
+    .quick-view-purchase {
+        grid-template-columns: 78px 1fr 48px;
+    }
+
+    .quick-view-price strong {
+        font-size: 22px;
+    }
+}
