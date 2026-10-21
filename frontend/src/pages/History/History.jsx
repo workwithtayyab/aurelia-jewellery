@@ -1,7 +1,10 @@
+
 import API_BASE_URL from "../../config";
 
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import products from "../../data/products";
 
 import {
   FaBoxOpen,
@@ -88,6 +91,37 @@ const History = () => {
     return order.orderDate || "Date unavailable";
   };
 
+  const getCatalogueProduct = (item) => {
+    return products.find((product) => {
+      const orderProductId = item.productId ?? item.id;
+
+      const matchesId =
+        orderProductId != null &&
+        String(product.id) === String(orderProductId);
+
+      const matchesName =
+        product.name?.trim().toLowerCase() ===
+        item.name?.trim().toLowerCase();
+
+      return matchesId || matchesName;
+    });
+  };
+
+  const handleImageError = (event, fallbackImage) => {
+    const image = event.currentTarget;
+
+    if (
+      fallbackImage &&
+      image.dataset.fallbackTried !== "true"
+    ) {
+      image.dataset.fallbackTried = "true";
+      image.src = fallbackImage;
+      return;
+    }
+
+    image.style.visibility = "hidden";
+  };
+
   if (loading) {
     return (
       <main className="history-page">
@@ -107,6 +141,7 @@ const History = () => {
           <p className="history-eyebrow">AURELIA</p>
           <h1>My Orders</h1>
           <p>{error}</p>
+
           <button
             type="button"
             onClick={() => window.location.reload()}
@@ -164,13 +199,17 @@ const History = () => {
           </div>
 
           <div className="history-count">
-            {orders.length} {orders.length === 1 ? "Order" : "Orders"}
+            {orders.length}{" "}
+            {orders.length === 1 ? "Order" : "Orders"}
           </div>
         </div>
 
         <div className="history-list">
           {orders.map((order) => (
-            <article className="history-order" key={order._id || order.orderNumber}>
+            <article
+              className="history-order"
+              key={order._id || order.orderNumber}
+            >
               <div className="history-order-top">
                 <div className="history-order-number">
                   <div className="history-order-icon">
@@ -186,7 +225,9 @@ const History = () => {
                 <span
                   className={`history-status ${(
                     order.orderStatus || "Processing"
-                  ).toLowerCase().replace(/\s+/g, "-")}`}
+                  )
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
                 >
                   {order.orderStatus || "Processing"}
                 </span>
@@ -205,7 +246,9 @@ const History = () => {
                   <FaCreditCard />
                   <div>
                     <span>PAYMENT</span>
-                    <strong>{order.paymentMethod || "Cash on Delivery"}</strong>
+                    <strong>
+                      {order.paymentMethod || "Cash on Delivery"}
+                    </strong>
                   </div>
                 </div>
 
@@ -213,32 +256,61 @@ const History = () => {
                   <FaMapMarkerAlt />
                   <div>
                     <span>DELIVERY</span>
-                    <strong>{order.customer?.city || "Address provided"}</strong>
+                    <strong>
+                      {order.customer?.city || "Address provided"}
+                    </strong>
                   </div>
                 </div>
               </div>
 
               <div className="history-products">
-                {order.items?.map((item, index) => (
-                  <div
-                    className="history-product"
-                    key={`${item.productId || item.name}-${index}`}
-                  >
-                    <div className="history-product-image">
-                      {item.image && <img src={item.image} alt={item.name} />}
-                      <span>{item.quantity}</span>
-                    </div>
+                {order.items?.map((item, index) => {
+                  const catalogueProduct = getCatalogueProduct(item);
 
-                    <div className="history-product-details">
-                      <h4>{item.name}</h4>
-                      <p>{item.category}</p>
-                    </div>
+                  const imageSrc =
+                    catalogueProduct?.image || item.image;
 
-                    <strong className="history-product-price">
-                      {formatPrice(Number(item.price) * Number(item.quantity))}
-                    </strong>
-                  </div>
-                ))}
+                  return (
+                    <div
+                      className="history-product"
+                      key={`${
+                        item.productId || item.id || item.name
+                      }-${index}`}
+                    >
+                      <div className="history-product-image">
+                        {imageSrc && (
+                          <img
+                            src={imageSrc}
+                            alt={item.name || "Jewellery"}
+                            loading="lazy"
+                            onError={(event) =>
+                              handleImageError(
+                                event,
+                                catalogueProduct?.image &&
+                                  imageSrc !== catalogueProduct.image
+                                  ? catalogueProduct.image
+                                  : null
+                              )
+                            }
+                          />
+                        )}
+
+                        <span>{item.quantity}</span>
+                      </div>
+
+                      <div className="history-product-details">
+                        <h4>{item.name}</h4>
+                        <p>{item.category}</p>
+                      </div>
+
+                      <strong className="history-product-price">
+                        {formatPrice(
+                          Number(item.price) * Number(item.quantity)
+                        )}
+                      </strong>
+                    </div>
+                  );
+                })}
               </div>
 
               <div className="history-total">
@@ -247,7 +319,9 @@ const History = () => {
 
                 <div className="history-payment">
                   <span>PAYMENT STATUS</span>
-                  <strong>{order.paymentStatus || "Pending"}</strong>
+                  <strong>
+                    {order.paymentStatus || "Pending"}
+                  </strong>
                 </div>
               </div>
 
@@ -260,14 +334,16 @@ const History = () => {
                   <div>
                     <span>DELIVERING TO</span>
                     <p>
-                      {order.customer.firstName} {order.customer.lastName}
+                      {order.customer.firstName}{" "}
+                      {order.customer.lastName}
                       <br />
                       {order.customer.address}
                       {order.customer.apartment
                         ? `, ${order.customer.apartment}`
                         : ""}
                       <br />
-                      {order.customer.city}, {order.customer.state}{" "}
+                      {order.customer.city},{" "}
+                      {order.customer.state}{" "}
                       {order.customer.pincode}
                     </p>
                   </div>
