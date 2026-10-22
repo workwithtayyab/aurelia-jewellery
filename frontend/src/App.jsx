@@ -24,6 +24,7 @@ import History from "./pages/History/History";
 import OrderDetails from "./pages/OrderDetails/OrderDetails";
 import Account from "./pages/Account/Account";
 import About from "./pages/About/About";
+import Contact from "./pages/Contact/Contact";
 
 // Admin pages
 import AdminLayout from "./pages/Admin/AdminLayout";
@@ -61,59 +62,60 @@ function AnimatedRoutes() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/checkout" element={<Checkout />} />
+            <Route path="/contact" element={<Contact />} />
 
-          <Route
-            path="/order-success"
-            element={<OrderSuccess />}
-          />
-          <Route path="/about" element={<About />} />
+            <Route
+              path="/order-success"
+              element={<OrderSuccess />}
+            />
+            <Route path="/about" element={<About />} />
 
-          <Route path="/history" element={<History />} />
+            <Route path="/history" element={<History />} />
 
-          <Route
-            path="/order-details/:orderNumber"
-            element={<OrderDetails />}
-          />
+            <Route
+              path="/order-details/:orderNumber"
+              element={<OrderDetails />}
+            />
 
-          <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<Account />} />
 
-          {/* Admin login: public route */}
-          <Route
-            path="/admin/login"
-            element={<AdminLogin />}
-          />
+            {/* Admin login: public route */}
+            <Route
+              path="/admin/login"
+              element={<AdminLogin />}
+            />
 
-          {/* Protected admin routes */}
-          <Route element={<ProtectedAdminRoute />}>
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route
-                index
-                element={<AdminDashboard />}
-              />
+            {/* Protected admin routes */}
+            <Route element={<ProtectedAdminRoute />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route
+                  index
+                  element={<AdminDashboard />}
+                />
 
-              <Route
-                path="orders"
-                element={<AdminOrders />}
-              />
+                <Route
+                  path="orders"
+                  element={<AdminOrders />}
+                />
 
-              <Route
-                path="products"
-                element={<AdminProducts />}
-              />
+                <Route
+                  path="products"
+                  element={<AdminProducts />}
+                />
+              </Route>
             </Route>
-          </Route>
 
-          {/* 404 page */}
-          <Route
-            path="*"
-            element={
-              <main className="not-found-page">
-                <h1>404</h1>
-                <p>Sorry, this page could not be found.</p>
-              </main>
-            }
-          />
-        </Routes>
+            {/* 404 page */}
+            <Route
+              path="*"
+              element={
+                <main className="not-found-page">
+                  <h1>404</h1>
+                  <p>Sorry, this page could not be found.</p>
+                </main>
+              }
+            />
+          </Routes>
       </motion.div>
     </AnimatePresence>
   );

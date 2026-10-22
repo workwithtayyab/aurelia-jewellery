@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 const express = require("express");
@@ -10,30 +11,35 @@ const adminAuthRoutes = require("./routes/adminAuthRoutes");
 const authRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const adminOrderRoutes = require("./routes/adminOrderRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+const { rateLimit } = require("express-rate-limit");
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+// Validate required environment variables.
 if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32) {
-  throw new Error("Set a strong JWT_SECRET in backend environment variables");
+  throw new Error(
+    "Set a strong JWT_SECRET in backend environment variables"
+  );
 }
 
 if (!process.env.FRONTEND_URL) {
-  throw new Error("FRONTEND_URL is missing from backend environment variables");
+  throw new Error(
+    "FRONTEND_URL is missing from backend environment variables"
+  );
 }
 
-// FRONTEND_URL can hold one or several origins, comma separated.
-// Example: https://aurelia-jewellery-wheat-psi.vercel.app,http://localhost:5173
-// Trailing slashes are stripped because browsers never send them in Origin.
+// Allow one or more frontend origins, comma separated.
 const allowedOrigins = process.env.FRONTEND_URL.split(",")
   .map((origin) => origin.trim().replace(/\/+$/, ""))
   .filter(Boolean);
 
-// Render sits behind a proxy; needed for correct protocol/IP handling.
+// Render proxy and security settings.
 app.set("trust proxy", 1);
 app.disable("x-powered-by");
 
-// Basic hardening headers (this service only returns JSON).
+// Security headers.
 app.use((req, res, next) => {
   res.set({
     "X-Content-Type-Options": "nosniff",
@@ -41,16 +47,19 @@ app.use((req, res, next) => {
     "Referrer-Policy": "no-referrer",
     "Cross-Origin-Resource-Policy": "cross-origin",
   });
+
   next();
 });
 
+// CORS configuration.
 app.use(
   cors({
     origin(origin, callback) {
-      // No Origin header = curl, health checks, server-to-server calls.
+      // Allow requests without an Origin header, such as health checks.
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
+
       console.warn(`CORS blocked origin: ${origin}`);
       return callback(null, false);
     },
@@ -58,8 +67,7 @@ app.use(
   })
 );
 
-// Defence in depth against CSRF: cookies are SameSite=None in production,
-// so reject any state-changing request that comes from an unknown origin.
+// Reject state-changing requests from unknown browser origins.
 const SAFE_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);
 
 app.use((req, res, next) => {
@@ -70,43 +78,55 @@ app.use((req, res, next) => {
     origin &&
     !allowedOrigins.includes(origin)
   ) {
-    return res.status(403).json({ message: "Origin not allowed." });
+    return res.status(403).json({
+      message: "Origin not allowed.",
+    });
   }
 
   next();
 });
 
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+  message: {
+    message: "Too many contact requests. Please try again in 15 minutes.",
+  },
+});
+
+// Parse request bodies and cookies.
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
 
-// Public checks (placed BEFORE the DB middleware so they still respond
-// when the database is down).
+// Basic API status endpoint.
 app.get("/", (req, res) => {
-  res.json({ message: "Aurelia Jewellery API is running" });
+  res.json({
+    message: "Aurelia Jewellery API is running",
+  });
 });
 
-// Liveness check for Render's "Health Check Path" (/api/health).
-// It answers 200 as long as the process is up, so a brief database blip
-// does not make Render restart a healthy server. The database state is
-// reported in the body for humans and uptime monitors.
+// Render health check.
+
 app.get("/api/health", (req, res) => {
   const connected = mongoose.connection.readyState === 1;
 
-  // If the connection dropped, start reconnecting in the background
-  // without making the health check wait for it.
   if (!connected) {
-    connectDB().catch((error) =>
-      console.error("Database reconnect failed:", error.message)
-    );
+    connectDB().catch((error) => {
+      console.error("Database reconnect failed:", error.message);
+    });
   }
 
-  res.status(200).json({
+  return res.status(connected ? 200 : 503).json({
     message: "Aurelia backend health check",
     server: "running",
     database: connected ? "connected" : "disconnected",
   });
 });
 
+// Contact enquiries use Resend and do not require MongoDB.
+app.use("/api/contact", contactLimiter, contactRoutes);
 // Ensure MongoDB is connected before handling API requests.
 app.use(async (req, res, next) => {
   try {
@@ -114,45 +134,66 @@ app.use(async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Database connection failed:", error.message);
-    res.status(503).json({ message: "Database unavailable" });
+
+    res.status(503).json({
+      message: "Database unavailable",
+    });
   }
 });
 
+// Existing API routes.
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin/auth", adminAuthRoutes);
 app.use("/api/admin/orders", adminOrderRoutes);
 
-// 404 for unknown routes
-app.use((req, res) => {
-  res.status(404).json({ message: "Route not found." });
-});
+// Contact form route — sends enquiries through the contact route
+// implemented in ./routes/contactRoutes.js.
+// app.use("/api/contact", contactLimiter, contactRoutes);
 
-// Last-resort error handler (e.g. malformed JSON bodies)
-app.use((err, req, res, next) => {
-  console.error("Unhandled error:", err.message);
-  const status = err.status || err.statusCode || 500;
-  res.status(status).json({
-    message: status === 500 ? "Something went wrong." : err.message,
+// Handle unknown routes.
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Route not found.",
   });
 });
 
-// Export the Express app (kept for compatibility).
+// Last-resort error handler.
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err.message);
+
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  const status = err.status || err.statusCode || 500;
+
+  res.status(status).json({
+    message:
+      status >= 500
+        ? "Something went wrong."
+        : err.message,
+  });
+});
+
+// Export the Express app for testing and deployment compatibility.
 module.exports = app;
 
-// Start the server (Render and local dev both run `node server.js`).
+// Start the server when this file is executed directly.
 if (require.main === module) {
   const server = app.listen(PORT, () => {
     console.log(`Backend running on port ${PORT}`);
   });
 
-  // Connect to MongoDB immediately instead of waiting for the first request,
-  // so the first customer does not pay the connection delay.
-  connectDB().catch((error) =>
-    console.error("Initial database connection failed:", error.message)
-  );
+  // Establish the database connection at startup.
+  connectDB().catch((error) => {
+    console.error(
+      "Initial database connection failed:",
+      error.message
+    );
+  });
 
-  // Render sends SIGTERM on every deploy/restart: finish in-flight requests.
+  // Graceful shutdown for Render deployments.
   const shutdown = (signal) => {
     console.log(`${signal} received, shutting down gracefully...`);
 
@@ -160,12 +201,16 @@ if (require.main === module) {
       try {
         await mongoose.connection.close();
       } catch (error) {
-        console.error("Error closing MongoDB connection:", error.message);
+        console.error(
+          "Error closing MongoDB connection:",
+          error.message
+        );
       }
+
       process.exit(0);
     });
 
-    // Force exit if something hangs.
+    // Force exit if shutdown gets stuck.
     setTimeout(() => process.exit(1), 10000).unref();
   };
 
@@ -173,6 +218,7 @@ if (require.main === module) {
   process.on("SIGINT", () => shutdown("SIGINT"));
 }
 
+// Log unhandled promise rejections.
 process.on("unhandledRejection", (reason) => {
   console.error("Unhandled promise rejection:", reason);
 });
